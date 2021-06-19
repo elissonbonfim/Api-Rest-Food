@@ -6,23 +6,20 @@
 package com.elisson.apifood.notificacao;
 
 import com.elisson.apifood.modelo.Cliente;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author elisson
  */
-//@Primary
-@TipoDoNotificador(NivelUrgencia.NORMAL)
+@TipoDoNotificador(NivelUrgencia.CRITICO)
 @Component
-public class NotificadorEmail implements Notificador {
+public class NotificadorSms implements Notificador {
 
     @Override
     public void notificar(Cliente cliente, String mensagem) {
-        mensagem = mensagem.toUpperCase();
-        System.out.printf("Notificando %s através do e-mail %s: %s\n",
-                cliente.getNome(), cliente.getEmail(), mensagem);
+        System.out.printf("Notificando %s por SMS através do telefone %s \n",
+                cliente.getNome(), cliente.getTelefone(), mensagem);
     }
+
 }

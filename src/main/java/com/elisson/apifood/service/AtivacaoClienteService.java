@@ -6,23 +6,32 @@
 package com.elisson.apifood.service;
 
 import com.elisson.apifood.modelo.Cliente;
+import com.elisson.apifood.notificacao.NivelUrgencia;
 import com.elisson.apifood.notificacao.Notificador;
+import com.elisson.apifood.notificacao.TipoDoNotificador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author elisson
  */
+@Component
 public class AtivacaoClienteService {
 
+    @TipoDoNotificador(NivelUrgencia.CRITICO)
+    @Autowired
     private Notificador notificador;
 
-    public AtivacaoClienteService(Notificador notificador) {
-        this.notificador = notificador;
-    }
-    
+//    @Autowired
+//    public AtivacaoClienteService(Notificador notificador) {
+//        this.notificador = notificador;
+//    }
+
     public void ativar(Cliente cliente) {
         cliente.ativar();
-        
+
         notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
     }
 }
