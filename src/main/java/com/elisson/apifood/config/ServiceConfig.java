@@ -5,7 +5,6 @@
  */
 package com.elisson.apifood.config;
 
-import com.elisson.apifood.notificacao.Notificador;
 import com.elisson.apifood.service.AtivacaoClienteService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,4 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServiceConfig {
 
+//    @Bean(initMethod = "init")
+//    public AtivacaoClienteService ativacaoClienteService(){
+//        return new AtivacaoClienteService();
+//    }
 }

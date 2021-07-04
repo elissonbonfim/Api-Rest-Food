@@ -9,8 +9,10 @@ import com.elisson.apifood.modelo.Cliente;
 import com.elisson.apifood.notificacao.NivelUrgencia;
 import com.elisson.apifood.notificacao.Notificador;
 import com.elisson.apifood.notificacao.TipoDoNotificador;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,18 +22,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class AtivacaoClienteService {
 
-    @TipoDoNotificador(NivelUrgencia.CRITICO)
-    @Autowired
-    private Notificador notificador;
-
+//    @TipoDoNotificador(NivelUrgencia.CRITICO)
 //    @Autowired
-//    public AtivacaoClienteService(Notificador notificador) {
-//        this.notificador = notificador;
-//    }
-
+//    private Notificador notificador;
+    
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+    
     public void ativar(Cliente cliente) {
         cliente.ativar();
 
-        notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
+        eventPublisher.publishEvent(new ClientAtivadoEvent(cliente));
+        
+//        notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
     }
 }
